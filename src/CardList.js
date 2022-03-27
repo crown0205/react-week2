@@ -5,18 +5,18 @@ import { useSelector } from "react-redux";
 
 function CardList() {
   const history = useHistory();
-  const cradList = useSelector(state => state.card.list);
+  const cardList = useSelector(state => state.card.list);
 
-  console.log(cradList);
+  console.log(cardList);
   return (
     <>
       <CardContainer>
-        {cradList.map((item, index) => {
+        {cardList.map((item, index) => {
           return (
-            <div className="cardItem" key={`card_${index}`} checked={cradList[index].completed}>
-              <p className="cardTitle">{cradList[index].txt1}</p>
-              <p className="cardtxt2">[{cradList[index].txt2}]</p>
-              <p className="cardtxt3">{cradList[index].txt3}</p>
+            <div className="cardItem" key={`card_${index}`} checked={cardList[index].completed}>
+              <p className="cardTitle">{cardList[index].txt1}</p>
+              <p className="cardTxt2">[{cardList[index].txt2}]</p>
+              <p className="cardTxt3">{cardList[index].txt3}</p>
               <div className="btnWrap">
                 <span>check</span>
                 <span>edit</span>
@@ -58,12 +58,12 @@ const CardContainer = styled.div`
     margin-bottom: 10px;
   }
 
-  .cardtxt2 {
+  .cardTxt2 {
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 10px;
   }
-  .cardtxt3 {
+  .cardTxt3 {
     font-size: 16px;
     font-weight: 400;
     color: #0984e3;

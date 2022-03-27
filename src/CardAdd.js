@@ -4,23 +4,26 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCard } from "./redux/modules/card";
 
-
 // import { createBucket } from "./redux/modules/card";
 // import { useDispatch } from "react-redux";
 
 function CardAdd() {
   const history = useHistory();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const txt1 = React.useRef(null);
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
 
-  console.log(txt1.current.value) // input 값 콘솔에 찍힘.
+  const addCreate = () => {
+    dispatch(
+      createCard({
+        txt1: txt1.current.value,
+        txt2: txt2.current.value,
+        txt3: txt3.current.value,
+      })
+    );
+  };
 
-  const addCreate = ()=>{
-    dispatch(createCard({txt1:txt1.current.value, txt2:txt2.current.value, txt3:txt3.current.value}))
-  }
-  
   return (
     <AddContainer>
       <div className="addWrap">
@@ -28,21 +31,21 @@ function CardAdd() {
         <form className="inputWrap">
           <div>
             <label>단어</label>
-            <input name="txt1" ref={txt1} onChange={(txt1)=>console.log(txt1.target.value)}></input>
+            <input name="txt1" ref={txt1}></input>
           </div>
           <div>
             <label>음절</label>
-            <input name="txt2" ref={txt2} onChange={(e)=>console.log(e.target.value)}></input>
+            <input name="txt2" ref={txt2}></input>
           </div>
           <div>
             <label>예시</label>
-            <input name="txt3" ref={txt3} onChange={(e)=>console.log(e.target.value)}></input>
+            <input name="txt3" ref={txt3}></input>
           </div>
         </form>
         <div
           className="saveBtn"
           onClick={() => {
-            addCreate()
+            addCreate();
             history.push("/");
           }}
         >
