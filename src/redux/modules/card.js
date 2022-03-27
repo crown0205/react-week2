@@ -1,6 +1,6 @@
 // 액션 타입을 정해줍니다.
 const CREATE = "card/CREATE";
-const DELETE = "card/DELETE";
+// const DELETE = "card/DELETE";
 
 // 초기 상태값을 만들어줍니다.
 const initState = {
@@ -12,10 +12,10 @@ const initState = {
 };
 
 // 액션 생성 함수예요.
-// export function createBucket(card) {
-//   console.log("액션을 생성할거야!");
-//   return { type: CREATE, card };
-// }
+export function createCard(card) {
+  console.log("액션을 생성할거야!");
+  return { type: CREATE, card };
+}
 
 // export function deleteBucket(card_index) {
 //   console.log("지울 버킷 인덱스", card_index);
@@ -25,11 +25,11 @@ const initState = {
 // 실질적으로 store에 들어가 있는 데이터를 변경하는 곳이죠!
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
-    // case "bucket/CREATE": {
-    //   console.log("이제 값을 바꿀거야!");
-    //   const new_card_list = [...state.list, action.card];
-    //   return { list: new_card_list };
-    // }
+    case "card/CREATE": {
+      console.log("이제 값을 바꿀거야!");
+      const new_card_list = [...state.list, action.card];
+      return { list: new_card_list };
+    }
 
     // case "bucket/DELETE": {
     //   const new_card_list = state.list.filter((l, idx) => {
