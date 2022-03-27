@@ -1,80 +1,96 @@
 import React from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 // import { createBucket } from "./redux/modules/card";
 // import { useDispatch } from "react-redux";
 
 function CardAdd() {
   const history = useHistory();
+  // const inputTxt = ["단어", "음절", "예시"];
+
   return (
-    <div>
-      <div style={{ background: "#dfdfdf", padding: "10px" }}>
-        <h2>단어 추가</h2>
-        <form style={{ background: "#eee", margin: "50px" }}>
-          <div
-            style={{
-              background: "#aaa",
-              marginBottom: "20px",
-              width: "80%",
-              margin: "auto",
-            }}
-          >
-            <label
-              style={{ marginLeft: "10%", textAlign: "left", display: "block" }}
-            >
-              단어
-            </label>
-            <input style={{ width: "80%" }}></input>
+    <AddContainer>
+      <div className="addWrap">
+        <h2 className="addTitle">단어 추가</h2>
+        <form className="inputWrap">
+          <div>
+            <label>단어</label>
+            <input></input>
           </div>
-          <div
-            style={{
-              background: "#aaa",
-              marginBottom: "20px",
-              width: "80%",
-              margin: "auto",
-            }}
-          >
-            <label
-              style={{ marginLeft: "10%", textAlign: "left", display: "block" }}
-            >
-              음절
-            </label>
-            <input style={{ width: "80%" }}></input>
+          <div>
+            <label>음절</label>
+            <input></input>
           </div>
-          <div
-            style={{
-              background: "#aaa",
-              marginBottom: "20px",
-              width: "80%",
-              margin: "auto",
-            }}
-          >
-            <label
-              style={{ marginLeft: "10%", textAlign: "left", display: "block" }}
-            >
-              예시
-            </label>
-            <input style={{ width: "80%" }}></input>
+          <div>
+            <label>예시</label>
+            <input></input>
           </div>
         </form>
         <div
-          style={{
-            width: "200px",
-            height: "50px",
-            background: "#aaa",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "auto",
-          }}
-          onClick = {()=> {
-            history.goBack()
+          className="saveBtn"
+          onClick={() => {
+            history.goBack();
           }}
         >
           저장하기
         </div>
       </div>
-    </div>
+    </AddContainer>
   );
 }
+
+const AddContainer = styled.div`
+  .addWrap {
+    background-color: #dfdfdf;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  .addTitle {
+    letter-spacing: 2px;
+  }
+
+  .inputWrap {
+    /* background-color: #fff; */
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-height: 200px;
+    margin: 30px auto 30px;
+
+    div {
+      /* background-color: #aaa; */
+      width: 80%;
+      margin: 0px auto 10px;
+      label {
+        display: block;
+        text-align: left;
+        font-weight: 500;
+        margin-left: 20px;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 90%;
+        height: 80px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        padding: 0px 10px;
+      }
+    }
+  }
+
+  .saveBtn {
+    width: 200px;
+    height: 50px;
+    background-color: #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0px auto 30px;
+    box-shadow: 1px 1px 1px gray;
+  }
+`;
 
 export default CardAdd;
