@@ -33,7 +33,7 @@ const HeaderStyle = styled.div`
 `;
 
 const WrapStyle = styled.div`
-  padding: 20px;
+  padding-top: 30px;
 `;
 
 export default App;

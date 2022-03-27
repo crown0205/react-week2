@@ -52,8 +52,14 @@ function CardList() {
 }
 
 const CardContainer = styled.div`
+  max-width: 800px;
+  min-width: 300px;
+  width: 90%;
+  margin: auto;
   background-color: #eee;
   padding: 10px;
+  box-shadow: 1px 1px 4px 1px #b3b3b3;
+
 
   .cardItem {
     background-color: #dfdfdf;

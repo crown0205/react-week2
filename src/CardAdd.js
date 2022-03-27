@@ -53,13 +53,16 @@ function CardAdd() {
 }
 
 const AddContainer = styled.div`
-  padding: 0 50px;
-
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
   .addWrap {
     background-color: #dfdfdf;
-    width: 100%;
+    max-width: 450px;
+    width: 90%;
+    height: 540px;
     border-radius: 10px;
-    margin: 20px auto 0px;
+    margin: 0px auto 0px;
     padding: 10px;
   }
 
@@ -68,12 +71,15 @@ const AddContainer = styled.div`
   }
 
   .inputWrap {
-    /* background-color: #fff; */
+    background-color: #fff;
     display: flex;
     flex-direction: column;
-    max-width: 80%;
-    min-height: 200px;
-    margin: 30px auto 30px;
+    justify-content: space-evenly;
+    max-width: 400px;
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    margin: 20px auto;
 
     div {
       /* background-color: #aaa; */
