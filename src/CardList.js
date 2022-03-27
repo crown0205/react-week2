@@ -6,7 +6,7 @@ function CardList() {
   const history = useHistory();
   return (
     <>
-      <Container>
+      <CardContainer>
         <div className="cardItem">
           <p className="cardTitle">title</p>
           <p className="cardtxt2">[title]</p>
@@ -22,12 +22,12 @@ function CardList() {
           }}>
             <p>+</p>
         </div>
-      </Container>
+      </CardContainer>
     </>
   );
 }
 
-const Container = styled.div`
+const CardContainer = styled.div`
   background-color: #eee;
   padding: 10px;
 
