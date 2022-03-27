@@ -1,26 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CardList() {
   const history = useHistory();
+  const cradList = useSelector(state => state.card.list);
+
+  console.log(cradList);
   return (
     <>
       <CardContainer>
-        <div className="cardItem">
-          <p className="cardTitle">title</p>
-          <p className="cardtxt2">[title]</p>
-          <p className="cardtxt3">예시</p>
-          <div className="btnWrap">
-            <span>check</span>
-            <span>edit</span>
-            <span>add</span>
-          </div>
-        </div>
-        <div className="upBtn" onClick={() => {
+        {cradList.map((item, index) => {
+          return (
+            <div className="cardItem" key={`card_${index}`} completed={cradList[index].completed}>
+              <p className="cardTitle">{cradList[index].txt1}</p>
+              <p className="cardtxt2">[{cradList[index].txt2}]</p>
+              <p className="cardtxt3">{cradList[index].txt3}</p>
+              <div className="btnWrap">
+                <span>check</span>
+                <span>edit</span>
+                <span>add</span>
+              </div>
+            </div>
+          );
+        })}
+        <div
+          className="upBtn"
+          onClick={() => {
             history.push("/add");
-          }}>
-            <p>+</p>
+          }}
+        >
+          <p>+</p>
         </div>
       </CardContainer>
     </>
@@ -49,13 +60,13 @@ const CardContainer = styled.div`
   }
 
   .cardtxt2 {
-      font-size: 14px;
-      font-weight: 400;
-      margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
   }
   .cardtxt3 {
     font-size: 16px;
-    font-weight: 400; 
+    font-weight: 400;
     color: #0984e3;
   }
 
@@ -69,23 +80,22 @@ const CardContainer = styled.div`
     }
   }
 
-.upBtn {
-  background-color: #aaa;
-  position:fixed;
-  bottom: 30px;
-  right: 30px;
-  display: flex;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
+  .upBtn {
+    background-color: #aaa;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
 
     p {
       font-size: 26px;
       font-weight: 700;
     }
-
-}
+  }
 `;
 export default CardList;
