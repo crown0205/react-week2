@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { BsCheckLg } from "react-icons/bs";
+import { BiEditAlt } from "react-icons/bi";
+import DeleteBtn from "./DeleteBtn";
+
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {BsCheckLg, BsPencilSquare} from "react-icons/bs"
-import {AiFillDelete} from "react-icons/ai"
-import {BiEditAlt} from "react-icons/bi"
 
 function CardList() {
   const history = useHistory();
@@ -16,14 +17,23 @@ function CardList() {
       <CardContainer>
         {cardList.map((item, index) => {
           return (
-            <div className="cardItem" key={`card_${index}`} checked={cardList[index].completed}>
+            <div
+              className="cardItem"
+              key={`card_${index}`}
+              checked={cardList[index].completed}
+              num={index}
+            >
               <p className="cardTitle">{cardList[index].txt1}</p>
               <p className="cardTxt2">[{cardList[index].txt2}]</p>
               <p className="cardTxt3">{cardList[index].txt3}</p>
               <div className="btnWrap">
-                <span className="check"><BsCheckLg/></span>
-                <span className="edit"><BiEditAlt/></span>
-                <span className="delete"><AiFillDelete/></span>
+                <span className="check">
+                  <BsCheckLg />
+                </span>
+                <span className="edit">
+                  <BiEditAlt />
+                </span>
+                <DeleteBtn num={index} />
               </div>
             </div>
           );
@@ -85,23 +95,23 @@ const CardContainer = styled.div`
     }
 
     .check {
-      &:hover{
-        color: #10C300;
+      &:hover {
+        color: #10c300;
       }
     }
 
     .edit {
       font-weight: 700;
       font-size: 24px;
-      &:hover{
+      &:hover {
         color: #ffaa00;
       }
     }
 
     .delete {
       font-size: 22px;
-      &:hover{
-        color: #FF5400;
+      &:hover {
+        color: #ff5400;
       }
     }
   }
