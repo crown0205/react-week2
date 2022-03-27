@@ -1,5 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+// import { createBucket } from "./redux/modules/card";
+// import { useDispatch } from "react-redux";
 
 function CardAdd() {
   const history = useHistory();
@@ -34,7 +36,7 @@ function CardAdd() {
             <label
               style={{ marginLeft: "10%", textAlign: "left", display: "block" }}
             >
-              단어
+              음절
             </label>
             <input style={{ width: "80%" }}></input>
           </div>
@@ -49,7 +51,7 @@ function CardAdd() {
             <label
               style={{ marginLeft: "10%", textAlign: "left", display: "block" }}
             >
-              단어
+              예시
             </label>
             <input style={{ width: "80%" }}></input>
           </div>
