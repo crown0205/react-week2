@@ -40,10 +40,13 @@ function CardAdd() {
 }
 
 const AddContainer = styled.div`
+  padding: 0 50px;
+
   .addWrap {
     background-color: #dfdfdf;
+    width: 100%;
     border-radius: 10px;
-    margin-top: 20px;
+    margin: 20px auto 0px;
     padding: 10px;
   }
 
@@ -55,13 +58,14 @@ const AddContainer = styled.div`
     /* background-color: #fff; */
     display: flex;
     flex-direction: column;
-    width: 80%;
+    max-width: 80%;
     min-height: 200px;
     margin: 30px auto 30px;
 
     div {
       /* background-color: #aaa; */
-      width: 80%;
+      min-width: 80%;
+      width: 100%;
       margin: 0px auto 10px;
       label {
         display: block;
