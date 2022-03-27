@@ -13,7 +13,7 @@ function CardList() {
       <CardContainer>
         {cradList.map((item, index) => {
           return (
-            <div className="cardItem" key={`card_${index}`} completed={cradList[index].completed}>
+            <div className="cardItem" key={`card_${index}`} checked={cradList[index].completed}>
               <p className="cardTitle">{cradList[index].txt1}</p>
               <p className="cardtxt2">[{cradList[index].txt2}]</p>
               <p className="cardtxt3">{cradList[index].txt3}</p>
@@ -45,17 +45,16 @@ const CardContainer = styled.div`
   .cardItem {
     background-color: #dfdfdf;
     border-radius: 10px;
-    padding: 10px;
+    padding: 16px;
     text-align: left;
     position: relative;
-    height: 130px;
+    min-height: 120px;
     margin-bottom: 10px;
   }
 
   .cardTitle {
     font-size: 24px;
     font-weight: 600;
-    margin-top: 10px;
     margin-bottom: 10px;
   }
 
@@ -72,8 +71,8 @@ const CardContainer = styled.div`
 
   .btnWrap {
     position: absolute;
-    top: 24px;
-    right: 30px;
+    top: 16px;
+    right: 0px;
 
     span {
       margin-right: 14px;
