@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {BsCheckLg, BsPencilSquare} from "react-icons/bs"
+import {AiFillDelete} from "react-icons/ai"
+import {BiEditAlt} from "react-icons/bi"
 
 function CardList() {
   const history = useHistory();
@@ -18,15 +21,15 @@ function CardList() {
               <p className="cardTxt2">[{cardList[index].txt2}]</p>
               <p className="cardTxt3">{cardList[index].txt3}</p>
               <div className="btnWrap">
-                <span>check</span>
-                <span>edit</span>
-                <span>add</span>
+                <span className="check"><BsCheckLg/></span>
+                <span className="edit"><BiEditAlt/></span>
+                <span className="delete"><AiFillDelete/></span>
               </div>
             </div>
           );
         })}
         <div
-          className="upBtn"
+          className="addBtn"
           onClick={() => {
             history.push("/add");
           }}
@@ -76,10 +79,34 @@ const CardContainer = styled.div`
 
     span {
       margin-right: 14px;
+      font-size: 20px;
+      color: #7b7a77;
+      cursor: pointer;
+    }
+
+    .check {
+      &:hover{
+        color: #10C300;
+      }
+    }
+
+    .edit {
+      font-weight: 700;
+      font-size: 24px;
+      &:hover{
+        color: #ffaa00;
+      }
+    }
+
+    .delete {
+      font-size: 22px;
+      &:hover{
+        color: #FF5400;
+      }
     }
   }
 
-  .upBtn {
+  .addBtn {
     background-color: #aaa;
     position: fixed;
     bottom: 30px;
@@ -90,6 +117,7 @@ const CardContainer = styled.div`
     border-radius: 50%;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     p {
       font-size: 26px;
