@@ -5,9 +5,14 @@ const DELETE = "card/DELETE";
 // 초기 상태값을 만들어줍니다.
 const initState = {
   list: [
-    { txt1: "title", txt2: "syllable", txt3: "예시" , completed:false},
-    { txt1: "아무개", txt2: "아무렇게", txt3: "아무개는 뭘까?", completed:false },
-    { txt1: "ㄴㄴ", txt2: "able", txt3: "네시", completed:false },
+    { txt1: "title", txt2: "syllable", txt3: "예시", completed: false },
+    {
+      txt1: "아무개",
+      txt2: "아무렇게",
+      txt3: "아무개는 뭘까?",
+      completed: false,
+    },
+    { txt1: "ㄴㄴ", txt2: "able", txt3: "네시", completed: false },
   ],
 };
 
@@ -31,10 +36,10 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case "card/DELETE": {
-      console.log(state.list, action)
+      // console.log(state.list, action)
       const new_card_list = state.list.filter((l, idx) => {
-      // console.log("이제 값을 삭제할거야!");
-      // console.log(l, idx)
+        // console.log("이제 값을 삭제할거야!");
+        // console.log(l, idx)
         return parseInt(action.card_index) !== idx;
       });
 

@@ -4,9 +4,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCard } from "./redux/modules/card";
 
-// import { createBucket } from "./redux/modules/card";
-// import { useDispatch } from "react-redux";
-
 function CardAdd() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -23,7 +20,6 @@ function CardAdd() {
       })
     );
   };
-
   return (
     <AddContainer>
       <div className="addWrap">
