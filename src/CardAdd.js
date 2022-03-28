@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCard } from "./redux/modules/card";
 import { db } from "./firebase";
-import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc } from "firebase/firestore";
 
 function CardAdd() {
   const history = useHistory();
@@ -13,15 +13,11 @@ function CardAdd() {
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
 
-  React.useEffect(async()=>{  //db를 사용하기 위해서는 async, await를 사용해야 된다.
+  React.useEffect(async()=>{ 
     console.log(db)
-    // const query = await getDocs(collection(db, "card"))   // db에서 이름이 같은 컬렉션 db의 모든 정보를 가져온다.
-    // console.log(query)
-    // query.forEach((doc)=>{    // 이전까지는 읽기 힘든 정보 였지만, forEach를 사용해 읽기 쉽게 변환 해주는 단계이다.
-    //   console.log(doc.id, doc.data())
-    // })
 
-    addDoc(collection(db,"card"), {txt1:"new", txt2:"nèw", txt3:"new card", completed:false})
+    const docRef= doc(db, "card", "UAWGqwUrUDjjNKwUjb9e"); // 수정해줄 doc 지정하고 data id지정해준다.
+    updateDoc(docRef, {completed: true}) // 지정해준것의 data의 변경할 데이터를 정해주면 db의 저장된 데이터도 바뀐다.
 
   },[])
 
