@@ -1,4 +1,16 @@
+import { db } from "../../firebase";
+import {               
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+
 // 액션 타입을 정해줍니다.
+const LOAD = "card/LOAD";
 const CREATE = "card/CREATE";
 const DELETE = "card/DELETE";
 
@@ -17,6 +29,10 @@ const initState = {
 };
 
 // 액션 생성 함수예요.
+export function loadCard(card_list) {
+  return {type: LOAD, card_list}
+}
+
 export function createCard(card) {
   console.log("액션을 생성할거야!");
   return { type: CREATE, card };
@@ -26,6 +42,20 @@ export function deleteCard(card_index) {
   // console.log("지울 버킷 인덱스", card_index);
   return { type: DELETE, card_index };
 }
+
+// 미들웨어
+export const loadCardFB = () =>{
+  return async function (dispatch) {
+    const card_data = await getDocs(collection(db, "card"))
+    console.log(card_data)
+    let card_list = []
+
+    card_data.forEach((card)=>{
+      console.log(card.data())
+    })
+  }
+}
+
 
 // 실질적으로 store에 들어가 있는 데이터를 변경하는 곳이죠!
 export default function reducer(state = initState, action = {}) {

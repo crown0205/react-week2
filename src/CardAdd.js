@@ -21,9 +21,9 @@ function CardAdd() {
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
 
-  React.useEffect(async () => {
-    console.log(db);
-  }, []);
+  // React.useEffect(async () => {
+  //   // console.log(db);
+  // }, []);
 
   const addCreate = () => {
     dispatch(

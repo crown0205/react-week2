@@ -5,13 +5,20 @@ import { BiEditAlt } from "react-icons/bi";
 import DeleteBtn from "./DeleteBtn";
 
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { db } from "./firebase";
+import { loadCardFB } from "./redux/modules/card"
 
 function CardList() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const cardList = useSelector(state => state.card.list);
 
-  console.log(cardList);
+  React.useEffect(()=>{
+    dispatch(loadCardFB())
+  })
+
+  // console.log(cardList);
   return (
     <>
       <CardContainer>
