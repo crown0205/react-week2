@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createCard } from "./redux/modules/card";
+import { addCardFB } from "./redux/modules/card";
 import { db } from "./firebase";
 import {
   collection,
@@ -21,16 +21,13 @@ function CardAdd() {
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
 
-  // React.useEffect(async () => {
-  //   // console.log(db);
-  // }, []);
-
   const addCreate = () => {
     dispatch(
-      createCard({
+      addCardFB({
         txt1: txt1.current.value,
         txt2: txt2.current.value,
         txt3: txt3.current.value,
+        completed: false,
       })
     );
   };

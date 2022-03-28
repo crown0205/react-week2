@@ -1,5 +1,5 @@
 import { db } from "../../firebase";
-import {               
+import {
   collection,
   doc,
   getDoc,
@@ -31,11 +31,12 @@ const initState = {
 
 // 액션 생성 함수예요.
 export function loadCard(card_list) {
-  return {type: LOAD, card_list}
+  return { type: LOAD, card_list };
 }
 
 export function createCard(card) {
   console.log("액션을 생성할거야!");
+  console.log("card : ", card);
   return { type: CREATE, card };
 }
 
@@ -45,27 +46,41 @@ export function deleteCard(card_index) {
 }
 
 // 미들웨어
-export const loadCardFB = () =>{
+export const loadCardFB = () => {
   return async function (dispatch) {
-    const card_data = await getDocs(collection(db, "card"))
+    const card_data = await getDocs(collection(db, "card"));
     // console.log(card_data)
-    
-    let card_list = []
 
-    card_data.forEach((card_item)=>{
-      console.log(card_item.data())
-      card_list = [...card_list, {...card_item.data()}]
-    })
+    let card_list = [];
 
-    dispatch(loadCard(card_list))
-  }
-}
+    card_data.forEach(card_item => {
+      card_list = [...card_list, { ...card_item.data() }];
+    });
+
+    dispatch(loadCard(card_list));
+  };
+};
+
+export const addCardFB = card => {
+  console.log("card1 : ", card);
+
+  return async function (dispatch) {
+    const docRef = await addDoc(collection(db, "card"), card);  // DB에 데이터 추가
+    const card_data = { id: docRef.id, ...card }; // 리덕스에 데이터 추가 1
+    console.log("card2 : ", card);
+    console.log("docRef : ", docRef);
+    console.log("card_data : ", card_data);
+    console.log("...data : ", { ...card });
+
+    dispatch(createCard(card_data)); // 리덕스에 데이터 추가 2
+  };
+};
 
 // 실질적으로 store에 들어가 있는 데이터를 변경하는 곳이죠!
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
-    case "card/LOAD" : {
-      return {list: action.card_list}
+    case "card/LOAD": {
+      return { list: action.card_list };
     }
 
     case "card/CREATE": {
@@ -74,10 +89,8 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case "card/DELETE": {
-      console.log(state.list, action)
+      console.log(state.list, action);
       const new_card_list = state.list.filter((l, idx) => {
-        // console.log("이제 값을 삭제할거야!");
-        // console.log(l, idx)
         return parseInt(action.card_index) !== idx;
       });
 

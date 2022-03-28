@@ -7,16 +7,16 @@ import DeleteBtn from "./DeleteBtn";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "./firebase";
-import { loadCardFB } from "./redux/modules/card"
+import { loadCardFB } from "./redux/modules/card";
 
 function CardList() {
   const history = useHistory();
   const dispatch = useDispatch();
   const cardList = useSelector(state => state.card.list);
 
-  React.useEffect(async()=>{
-    dispatch(loadCardFB())
-  },[])
+  React.useEffect(() => {
+    dispatch(loadCardFB());
+  }, []);
 
   // console.log(cardList);
   return (
@@ -66,7 +66,6 @@ const CardContainer = styled.div`
   background-color: #eee;
   padding: 10px;
   box-shadow: 1px 1px 4px 1px #b3b3b3;
-
 
   .cardItem {
     background-color: #dfdfdf;
