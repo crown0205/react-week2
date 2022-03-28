@@ -4,7 +4,15 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCard } from "./redux/modules/card";
 import { db } from "./firebase";
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 function CardAdd() {
   const history = useHistory();
@@ -13,12 +21,9 @@ function CardAdd() {
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
 
-  React.useEffect(async()=>{ 
-    console.log(db)
-
-  
-
-  },[])
+  React.useEffect(async () => {
+    console.log(db);
+  }, []);
 
   const addCreate = () => {
     dispatch(
