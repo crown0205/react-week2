@@ -8,6 +8,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 // 액션 타입을 정해줍니다.
 const LOAD = "card/LOAD";
@@ -47,26 +48,33 @@ export function deleteCard(card_index) {
 export const loadCardFB = () =>{
   return async function (dispatch) {
     const card_data = await getDocs(collection(db, "card"))
-    console.log(card_data)
+    // console.log(card_data)
+    
     let card_list = []
 
-    card_data.forEach((card)=>{
-      console.log(card.data())
+    card_data.forEach((card_item)=>{
+      console.log(card_item.data())
+      card_list = [...card_list, {...card_item.data()}]
     })
+
+    dispatch(loadCard(card_list))
   }
 }
-
 
 // 실질적으로 store에 들어가 있는 데이터를 변경하는 곳이죠!
 export default function reducer(state = initState, action = {}) {
   switch (action.type) {
+    case "card/LOAD" : {
+      return {list: action.card_list}
+    }
+
     case "card/CREATE": {
       const new_card_list = [...state.list, action.card];
       return { list: new_card_list };
     }
 
     case "card/DELETE": {
-      // console.log(state.list, action)
+      console.log(state.list, action)
       const new_card_list = state.list.filter((l, idx) => {
         // console.log("이제 값을 삭제할거야!");
         // console.log(l, idx)

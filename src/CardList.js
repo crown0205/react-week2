@@ -14,9 +14,9 @@ function CardList() {
   const dispatch = useDispatch();
   const cardList = useSelector(state => state.card.list);
 
-  React.useEffect(()=>{
+  React.useEffect(async()=>{
     dispatch(loadCardFB())
-  })
+  },[])
 
   // console.log(cardList);
   return (
