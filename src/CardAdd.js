@@ -16,8 +16,7 @@ function CardAdd() {
   React.useEffect(async()=>{ 
     console.log(db)
 
-    const docRef= doc(db, "card", "UAWGqwUrUDjjNKwUjb9e"); 
-    deleteDoc(docRef) // 수정하는 방법과 유사하다!
+  
 
   },[])
 
