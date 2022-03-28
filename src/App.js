@@ -1,13 +1,21 @@
+import React from "react";
 import "./App.css";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 import CardList from "./CardList";
 import CardAdd from "./CardAdd";
+
+import { Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { db } from "./firebase";
 
 
 function App() {
   const history = useHistory()
+
+  React.useEffect(()=>{
+    console.log(db)
+  },[])
+
   return (
     <div className="App">
       <HeaderStyle><span onClick={()=>{
