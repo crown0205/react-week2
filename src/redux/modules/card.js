@@ -17,16 +17,7 @@ const DELETE = "card/DELETE";
 
 // 초기 상태값을 만들어줍니다.
 const initState = {
-  list: [
-    { txt1: "title", txt2: "syllable", txt3: "예시", completed: false },
-    {
-      txt1: "아무개",
-      txt2: "아무렇게",
-      txt3: "아무개는 뭘까?",
-      completed: false,
-    },
-    { txt1: "ㄴㄴ", txt2: "able", txt3: "네시", completed: false },
-  ],
+  list: [],
 };
 
 // 액션 생성 함수예요.
@@ -54,7 +45,7 @@ export const loadCardFB = () => {
     let card_list = [];
 
     card_data.forEach(card_item => {
-      card_list = [...card_list, { ...card_item.data() }];
+      card_list.push({ id: card_item.id, ...card_item.data() });
     });
 
     dispatch(loadCard(card_list));
@@ -62,17 +53,26 @@ export const loadCardFB = () => {
 };
 
 export const addCardFB = card => {
-  console.log("card1 : ", card);
-
   return async function (dispatch) {
-    const docRef = await addDoc(collection(db, "card"), card);  // DB에 데이터 추가
-    const card_data = { id: docRef.id, ...card }; // 리덕스에 데이터 추가 1
-    console.log("card2 : ", card);
-    console.log("docRef : ", docRef);
-    console.log("card_data : ", card_data);
-    console.log("...data : ", { ...card });
+    const docRef = await addDoc(collection(db, "card"), card);
 
-    dispatch(createCard(card_data)); // 리덕스에 데이터 추가 2
+    const card_data = { id: docRef.id, ...card };
+    dispatch(createCard(card_data));
+  };
+};
+
+export const deleteCardFB = card_id => {
+  return async function (dispatch, getState) {
+    const docRef = doc(db, "card", card_id);
+    await deleteDoc(docRef);
+
+    const card_list = getState().card.list;
+    // console.log("card_list : ", card_list);
+    // console.log("getState : ", getState());
+    const card_index = card_list.findIndex((item) => {
+      return item.id === card_id
+    })
+    dispatch(deleteCard(card_index))
   };
 };
 
