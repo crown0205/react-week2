@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCard } from "./redux/modules/card";
 import { db } from "./firebase";
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 function CardAdd() {
   const history = useHistory();
@@ -16,8 +16,8 @@ function CardAdd() {
   React.useEffect(async()=>{ 
     console.log(db)
 
-    const docRef= doc(db, "card", "UAWGqwUrUDjjNKwUjb9e"); // 수정해줄 doc 지정하고 data id지정해준다.
-    updateDoc(docRef, {completed: true}) // 지정해준것의 data의 변경할 데이터를 정해주면 db의 저장된 데이터도 바뀐다.
+    const docRef= doc(db, "card", "UAWGqwUrUDjjNKwUjb9e"); 
+    deleteDoc(docRef) // 수정하는 방법과 유사하다!
 
   },[])
 
