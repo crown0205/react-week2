@@ -63,12 +63,13 @@ export const addCardFB = card => {
 
 export const deleteCardFB = card_id => {
   return async function (dispatch, getState) {
-    const docRef = doc(db, "card", card_id);
-    await deleteDoc(docRef);
+    const docRef = doc(db, "card", card_id); 
+    await deleteDoc(docRef); // DB에서 데이터 삭제하기
 
-    const card_list = getState().card.list;
-    // console.log("card_list : ", card_list);
-    // console.log("getState : ", getState());
+    const card_list = getState().card.list; // list찾아서 find로 하나씩 찾아 선택한 id값과 같은거 삭제하기
+    console.log("card_list : ", card_list);
+    console.log("getState : ", getState()); 
+
     const card_index = card_list.findIndex((item) => {
       return item.id === card_id
     })
