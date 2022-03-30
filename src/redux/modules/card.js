@@ -8,7 +8,6 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-// import { async } from "@firebase/util";
 
 // 액션 타입을 정해줍니다.
 const LOAD = "card/LOAD";
@@ -45,7 +44,6 @@ export function deleteCard(card_index) {
 export const loadCardFB = () => {
   return async function (dispatch) {
     const card_data = await getDocs(collection(db, "card"));
-    // console.log(card_data)
 
     let card_list = [];
     card_data.forEach(card_item => {
@@ -58,7 +56,7 @@ export const loadCardFB = () => {
 
 export const addCardFB = card => {
   return async function () {
-    await addDoc(collection(db, "card"), card); // 코드 정리
+    await addDoc(collection(db, "card"), card); 
   };
 };
 
@@ -66,7 +64,6 @@ export const updateCardFB = card => {
   console.log("card : ", card);
   return async function (dispatch, getState) {
     const docRef = doc(db, "card", card.id);
-    console.log((await getDoc(docRef)).data()); // 이렇게 해야지 불러온 데이터를 알아보기 쉽게 바꿀수 있다.
     await updateDoc(docRef, {
       txt1: card.txt1,
       txt2: card.txt2,
@@ -105,10 +102,7 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case "card/UPDATE": {
-      console.log("state :", state, "action : ", action.card_data.id);
-      console.log(action.card_data.txt2);
       const new_card_list = state.list.map((item, index) => {
-        console.log(item.id === action.card_data.id);
         if (item.id === action.card_data.id) {
           return {
             ...item,

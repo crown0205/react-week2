@@ -7,11 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 const DeleteBtn = props => {
   const dispatch = useDispatch();
   const num = props.num;
-  const card_list = useSelector(state => state.card.list)
-  // console.log(card_list[num].id)
-  // console.log("num : ",num)
-
-
+  const card_list = useSelector(state => state.card.list);
+  
   return (
     <>
       <span
