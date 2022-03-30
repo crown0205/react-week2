@@ -1,11 +1,10 @@
 * {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   box-sizing: border-box;
 }
 
 p {
-  margin:0;
-  /* 나중에 수정 css comfilener에서 합치기 */
+  margin: 0;
 }
 
 .App {

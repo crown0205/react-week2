@@ -26,8 +26,8 @@ const HeaderStyle = styled.div`
   font-size: 26px;
   font-weight: 600;
   padding: 26px;
-  border-bottom: 3px solid #eee;
-  box-shadow: 0px 2px 5px #dfdfdf;
+  box-shadow: 0px 7px 5px #a6a6a6;
+  background-color: #fff;
   span {
   cursor: pointer;
   }

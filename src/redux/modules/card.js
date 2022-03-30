@@ -8,7 +8,6 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 // 액션 타입을 정해줍니다.
 const LOAD = "card/LOAD";
@@ -32,7 +31,6 @@ export function createCard(card) {
 }
 
 export function deleteCard(card_index) {
-  // console.log("지울 버킷 인덱스", card_index);
   return { type: DELETE, card_index };
 }
 
@@ -43,7 +41,6 @@ export const loadCardFB = () => {
     // console.log(card_data)
 
     let card_list = [];
-
     card_data.forEach(card_item => {
       card_list.push({ id: card_item.id, ...card_item.data() });
     });
@@ -53,27 +50,21 @@ export const loadCardFB = () => {
 };
 
 export const addCardFB = card => {
-  return async function (dispatch) {
-    const docRef = await addDoc(collection(db, "card"), card);
-
-    const card_data = { id: docRef.id, ...card };
-    dispatch(createCard(card_data));
+  return async function () {
+    await addDoc(collection(db, "card"), card); // 코드 정리
   };
 };
 
 export const deleteCardFB = card_id => {
   return async function (dispatch, getState) {
-    const docRef = doc(db, "card", card_id); 
-    await deleteDoc(docRef); // DB에서 데이터 삭제하기
+    const docRef = doc(db, "card", card_id);
+    await deleteDoc(docRef);
 
-    const card_list = getState().card.list; // list찾아서 find로 하나씩 찾아 선택한 id값과 같은거 삭제하기
-    console.log("card_list : ", card_list);
-    console.log("getState : ", getState()); 
-
-    const card_index = card_list.findIndex((item) => {
-      return item.id === card_id
-    })
-    dispatch(deleteCard(card_index))
+    const card_list = getState().card.list;
+    const card_index = card_list.findIndex(item => {
+      return item.id === card_id;
+    });
+    dispatch(deleteCard(card_index));
   };
 };
 
@@ -90,7 +81,6 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case "card/DELETE": {
-      console.log(state.list, action);
       const new_card_list = state.list.filter((l, idx) => {
         return parseInt(action.card_index) !== idx;
       });

@@ -23,6 +23,7 @@ function CardList() {
     <>
       <CardContainer>
         {cardList.map((item, index) => {
+          // console.log(item)
           return (
             <div
               className="cardItem"
@@ -63,12 +64,13 @@ const CardContainer = styled.div`
   min-width: 300px;
   width: 90%;
   margin: auto;
-  background-color: #eee;
+  background-color: #5c5c5c;
   padding: 10px;
   box-shadow: 1px 1px 4px 1px #b3b3b3;
+  border-radius: 10px;
 
   .cardItem {
-    background-color: #dfdfdf;
+    background-color: #fff;
     border-radius: 10px;
     padding: 16px;
     text-align: left;
@@ -142,8 +144,10 @@ const CardContainer = styled.div`
     cursor: pointer;
 
     p {
-      font-size: 26px;
-      font-weight: 700;
+      font-size: 50px;
+      font-weight: 500;
+      line-height: 50px;
+      margin-bottom: 5px;
     }
   }
 `;
