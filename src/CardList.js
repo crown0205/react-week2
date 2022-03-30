@@ -68,8 +68,10 @@ const CardContainer = styled.div`
   min-width: 300px;
   width: 90%;
   margin: auto;
+  overflow-y: auto;
+  max-height: 1030px;
   background-color: #5c5c5c;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 1px 1px 4px 1px #b3b3b3;
   border-radius: 10px;
 
