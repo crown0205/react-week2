@@ -18,7 +18,6 @@ function CardList() {
     dispatch(loadCardFB());
   }, []);
 
-  // console.log(cardList);
   return (
     <>
       <CardContainer>

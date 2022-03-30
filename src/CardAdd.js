@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addCardFB } from "./redux/modules/card";
+import { addCardFB, updateCardFB } from "./redux/modules/card";
 import { db } from "./firebase";
 import {
   collection,
@@ -26,9 +26,7 @@ function CardAdd() {
   const item_id = url_value.id;
   const item_num = url_value.num;
   const item_data = store.getState().card.list[item_num];
-  console.log(item_num);
-
-  console.log("store : ", item_data);
+  console.log("item_data : ", item_data);
 
   const addCreate = () => {
     dispatch(
@@ -37,6 +35,18 @@ function CardAdd() {
         txt2: txt2.current.value,
         txt3: txt3.current.value,
         completed: false,
+      })
+    );
+  };
+
+  const editUpdate = () => {
+    console.log("수정");
+    dispatch(
+      updateCardFB({
+        txt1: txt1.current.value,
+        txt2: txt2.current.value,
+        txt3: txt3.current.value,
+        id: item_data.id,
       })
     );
   };
@@ -75,7 +85,7 @@ function CardAdd() {
         <div
           className="saveBtn"
           onClick={() => {
-            addCreate();
+            item_id ? editUpdate() : addCreate();
             history.push("/");
           }}
         >
@@ -122,7 +132,6 @@ const AddContainer = styled.div`
     margin: 25px auto;
 
     div {
-      /* background-color: #aaa; */
       min-width: 80%;
       width: 100%;
       margin: 0px auto 10px;
