@@ -91,7 +91,7 @@ const AddContainer = styled.div`
   width: 90%;
   margin: auto;
   .addWrap {
-    background-color: #dfdfdf;
+    background-color: #676767;
     max-width: 450px;
     width: 90%;
     height: 540px;
@@ -102,6 +102,12 @@ const AddContainer = styled.div`
 
   .addTitle {
     letter-spacing: 2px;
+    background: #fff;
+    height: 50px;
+    padding-top: 5px;
+    width: 65%;
+    margin: 10px auto 0px;
+    border-radius: 10px;
   }
 
   .inputWrap {
@@ -113,7 +119,7 @@ const AddContainer = styled.div`
     width: 100%;
     height: 400px;
     border-radius: 10px;
-    margin: 20px auto;
+    margin: 25px auto;
 
     div {
       /* background-color: #aaa; */
@@ -146,7 +152,10 @@ const AddContainer = styled.div`
     align-items: center;
     border-radius: 5px;
     margin: 0px auto 30px;
-    box-shadow: 1px 1px 1px gray;
+    box-shadow: 1px 1px 5px gray;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
   }
 `;
 

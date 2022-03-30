@@ -29,13 +29,14 @@ const HeaderStyle = styled.div`
   padding: 26px;
   box-shadow: 0px 7px 5px #a6a6a6;
   background-color: #fff;
+  border-radius: 0px 0px 10px 10px;
   span {
   cursor: pointer;
   }
 `;
 
 const WrapStyle = styled.div`
-  padding-top: 30px;
+  padding-top: 60px;
 `;
 
 export default App;

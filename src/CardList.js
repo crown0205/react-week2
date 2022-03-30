@@ -136,7 +136,7 @@ const CardContainer = styled.div`
   }
 
   .addBtn {
-    background-color: #aaa;
+    background-color: #5c5c5c;
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -153,6 +153,7 @@ const CardContainer = styled.div`
       font-weight: 500;
       line-height: 50px;
       margin-bottom: 5px;
+      color: #fff;
     }
   }
 `;
