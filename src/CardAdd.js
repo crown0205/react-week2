@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addCardFB } from "./redux/modules/card";
 import { db } from "./firebase";
 import {
@@ -13,6 +13,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import store from "./redux/configStore";
 
 function CardAdd() {
   const history = useHistory();
@@ -20,6 +21,14 @@ function CardAdd() {
   const txt1 = React.useRef(null);
   const txt2 = React.useRef(null);
   const txt3 = React.useRef(null);
+
+  const url_value = useParams();
+  const item_id = url_value.id;
+  const item_num = url_value.num;
+  const item_data = store.getState().card.list[item_num];
+  console.log(item_num);
+
+  console.log("store : ", item_data);
 
   const addCreate = () => {
     dispatch(
@@ -31,22 +40,36 @@ function CardAdd() {
       })
     );
   };
+
   return (
     <AddContainer>
       <div className="addWrap">
-        <h2 className="addTitle">단어 추가</h2>
+        <h2 className="addTitle">단어 {item_id ? "수정" : "추가"}</h2>
         <form className="inputWrap">
           <div>
             <label>단어</label>
-            <input name="txt1" ref={txt1}></input>
+            <input
+              name="txt1"
+              ref={txt1}
+              defaultValue={item_id ? item_data.txt1 : ""}
+              // onChange={(e)=> console.log(e.target.value)}
+            ></input>
           </div>
           <div>
             <label>음절</label>
-            <input name="txt2" ref={txt2}></input>
+            <input
+              name="txt2"
+              ref={txt2}
+              defaultValue={item_id ? item_data.txt2 : ""}
+            ></input>
           </div>
           <div>
             <label>예시</label>
-            <input name="txt3" ref={txt3}></input>
+            <input
+              name="txt3"
+              ref={txt3}
+              defaultValue={item_id ? item_data.txt3 : ""}
+            ></input>
           </div>
         </form>
         <div
@@ -56,7 +79,7 @@ function CardAdd() {
             history.push("/");
           }}
         >
-          저장하기
+          {item_id ? "수정" : "저징"}하기
         </div>
       </div>
     </AddContainer>

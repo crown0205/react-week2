@@ -38,7 +38,12 @@ function CardList() {
                 <span className="check">
                   <BsCheckLg />
                 </span>
-                <span className="edit">
+                <span
+                  className="edit"
+                  onClick={() => {
+                    history.push("/edit/" + item.id + "/" + index);
+                  }}
+                >
                   <BiEditAlt />
                 </span>
                 <DeleteBtn num={index} />

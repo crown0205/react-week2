@@ -17,6 +17,7 @@ function App() {
       <WrapStyle>
         <Route exact path="/" component={CardList} />
         <Route exact path="/add" component={CardAdd}/>
+        <Route exact path="/edit/:id/:num" component={CardAdd}/>
       </WrapStyle>
     </div>
   );
