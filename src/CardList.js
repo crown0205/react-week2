@@ -22,19 +22,24 @@ function CardList() {
     <>
       <CardContainer>
         {cardList.map((item, index) => {
-          // console.log(item)
+          console.log(item.completed)
           return (
-            <div
+            <CardItem
               className="cardItem"
               key={`card_${index}`}
-              checked={cardList[index].completed}
+              checked={item.completed}
               num={index}
             >
-              <p className="cardTitle">{cardList[index].txt1}</p>
-              <p className="cardTxt2">[{cardList[index].txt2}]</p>
-              <p className="cardTxt3">{cardList[index].txt3}</p>
+              <p className="cardTitle">{item.txt1}</p>
+              <p className="cardTxt2">[{item.txt2}]</p>
+              <p className="cardTxt3">{item.txt3}</p>
               <div className="btnWrap">
-                <span className="check">
+                <span
+                  className="check"
+                  onClick={() => {
+                    dispatch();
+                  }}
+                >
                   <BsCheckLg />
                 </span>
                 <span
@@ -47,7 +52,7 @@ function CardList() {
                 </span>
                 <DeleteBtn num={index} />
               </div>
-            </div>
+            </CardItem>
           );
         })}
         <div
@@ -75,15 +80,7 @@ const CardContainer = styled.div`
   box-shadow: 1px 1px 4px 1px #b3b3b3;
   border-radius: 10px;
 
-  .cardItem {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: left;
-    position: relative;
-    min-height: 120px;
-    margin-bottom: 10px;
-  }
+
 
   .cardTitle {
     font-size: 24px;
@@ -158,4 +155,17 @@ const CardContainer = styled.div`
     }
   }
 `;
+
+const  CardItem = styled.div`
+background-color: ${props => (props.checked ? "#aaa" : "#fff")};
+${props=>console.log(props)}  /* 이렇게 써줘야 콘솔값을 확인할수 있다. */
+border-radius: 10px;
+  padding: 16px;
+  text-align: left;
+  position: relative;
+  min-height: 120px;
+  margin-bottom: 10px;
+`  // 이렇게 해줘야 프로퍼티로 값이 잘 넘어 온다!!
+   // 그냥 div로 하면 프로퍼티로 값을 보내도 확인하기 힙들다.
+   // 프로퍼티로 값 받아서 쓸꺼면 styled component를 사용해서 값을 보내도록 하자~!! 
 export default CardList;
