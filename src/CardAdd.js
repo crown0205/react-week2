@@ -89,7 +89,7 @@ function CardAdd() {
             history.push("/");
           }}
         >
-          {item_id ? "수정" : "저징"}하기
+          {item_id ? "수정" : "저장"}하기
         </div>
       </div>
     </AddContainer>
