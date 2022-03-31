@@ -31,7 +31,9 @@ function CardList() {
             >
               <p className="cardTitle">{item.txt1}</p>
               <p className="cardTxt2">[{item.txt2}]</p>
-              <p className="cardTxt3">{item.txt3}</p>
+              <CardTxt3 className="cardTxt3" checked={item.completed}>
+                {item.txt3}
+              </CardTxt3>
               <div className="btnWrap">
                 <span
                   className="check"
@@ -79,8 +81,6 @@ const CardContainer = styled.div`
   box-shadow: 1px 1px 4px 1px #b3b3b3;
   border-radius: 10px;
 
-
-
   .cardTitle {
     font-size: 24px;
     font-weight: 600;
@@ -92,11 +92,11 @@ const CardContainer = styled.div`
     font-weight: 400;
     margin-bottom: 10px;
   }
-  .cardTxt3 {
+  /* .cardTxt3 {
     font-size: 16px;
     font-weight: 400;
     color: #0984e3;
-  }
+  } */
 
   .btnWrap {
     position: absolute;
@@ -155,13 +155,21 @@ const CardContainer = styled.div`
   }
 `;
 
-const  CardItem = styled.div`
-background-color: ${props => (props.checked ? "#aaa" : "#fff")};
-border-radius: 10px;
+const CardItem = styled.div`
+  background-color: ${props => (props.checked ? "#ccc" : "#fff")};
+  color: ${props => (props.checked ? "#fff" : "#000")};
+  border-radius: 10px;
   padding: 16px;
   text-align: left;
   position: relative;
   min-height: 120px;
   margin-bottom: 10px;
-`
+`;
+
+const CardTxt3 = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${props => (props.checked ? "#e29500" : "#0984e3")};
+  
+`;
 export default CardList;
