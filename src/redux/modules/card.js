@@ -8,12 +8,15 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 // 액션 타입을 정해줍니다.
 const LOAD = "card/LOAD";
 const CREATE = "card/CREATE";
 const UPDATE = "card/UPDATE";
+const CHECKED = "card/CHECKED";
 const DELETE = "card/DELETE";
+
 
 // 초기 상태값을 만들어줍니다.
 const initState = {
@@ -34,6 +37,12 @@ export function createCard(card) {
 export function updateCard(card_data) {
   console.log(card_data);
   return { type: UPDATE, card_data };
+}
+
+export function checkedCard(card) {
+  console.log("액션함수 - checked")
+  console.log("card : ", card)
+  return { type : CHECKED, card}
 }
 
 export function deleteCard(card_index) {
@@ -76,6 +85,20 @@ export const updateCardFB = card => {
   };
 };
 
+export const checkedCardFB = card => {
+  console.log("card_id : ", card.id)
+  return async function (dispatch) {
+    const docRef = doc(db, "card", card.id)
+    console.log("1 : ", (await getDoc(docRef)).data())
+
+    await updateDoc(docRef, {completed: !card.completed})
+    console.log("2 : ",(await getDoc(docRef)).data())
+
+
+    dispatch(checkedCard(card))
+  }
+}
+
 export const deleteCardFB = card_id => {
   return async function (dispatch, getState) {
     const docRef = doc(db, "card", card_id);
@@ -115,6 +138,21 @@ export default function reducer(state = initState, action = {}) {
         }
       });
       return { list: new_card_list };
+    }
+
+    case "card/CHECKED": {
+      // console.log("state : ", state)
+      // console.log("action : ", action)
+      const new_card_list = state.list.map((item, index) => {
+        // console.log("item : ",item.completed)
+        // console.log(action.card.id)
+        if(action.card.id === item.id) {
+            return  {...item, completed: !item.completed}
+          } else {  
+            return item;
+          }
+      });
+      return { list : new_card_list}
     }
 
     case "card/DELETE": {

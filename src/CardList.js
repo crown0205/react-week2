@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BsCheckLg } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
@@ -7,7 +7,7 @@ import DeleteBtn from "./DeleteBtn";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { db } from "./firebase";
-import { loadCardFB } from "./redux/modules/card";
+import { loadCardFB, checkedCardFB } from "./redux/modules/card";
 
 function CardList() {
   const history = useHistory();
@@ -22,7 +22,6 @@ function CardList() {
     <>
       <CardContainer>
         {cardList.map((item, index) => {
-          console.log(item.completed)
           return (
             <CardItem
               className="cardItem"
@@ -37,7 +36,7 @@ function CardList() {
                 <span
                   className="check"
                   onClick={() => {
-                    dispatch();
+                    dispatch(checkedCardFB(item));
                   }}
                 >
                   <BsCheckLg />
@@ -158,14 +157,11 @@ const CardContainer = styled.div`
 
 const  CardItem = styled.div`
 background-color: ${props => (props.checked ? "#aaa" : "#fff")};
-${props=>console.log(props)}  /* 이렇게 써줘야 콘솔값을 확인할수 있다. */
 border-radius: 10px;
   padding: 16px;
   text-align: left;
   position: relative;
   min-height: 120px;
   margin-bottom: 10px;
-`  // 이렇게 해줘야 프로퍼티로 값이 잘 넘어 온다!!
-   // 그냥 div로 하면 프로퍼티로 값을 보내도 확인하기 힙들다.
-   // 프로퍼티로 값 받아서 쓸꺼면 styled component를 사용해서 값을 보내도록 하자~!! 
+`
 export default CardList;
