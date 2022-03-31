@@ -17,7 +17,6 @@ const UPDATE = "card/UPDATE";
 const CHECKED = "card/CHECKED";
 const DELETE = "card/DELETE";
 
-
 // 초기 상태값을 만들어줍니다.
 const initState = {
   list: [],
@@ -40,9 +39,9 @@ export function updateCard(card_data) {
 }
 
 export function checkedCard(card) {
-  console.log("액션함수 - checked")
-  console.log("card : ", card)
-  return { type : CHECKED, card}
+  console.log("액션함수 - checked");
+  console.log("card : ", card);
+  return { type: CHECKED, card };
 }
 
 export function deleteCard(card_index) {
@@ -65,7 +64,7 @@ export const loadCardFB = () => {
 
 export const addCardFB = card => {
   return async function () {
-    await addDoc(collection(db, "card"), card); 
+    await addDoc(collection(db, "card"), card);
   };
 };
 
@@ -79,25 +78,18 @@ export const updateCardFB = card => {
       txt3: card.txt3,
     });
 
-    const card_list = getState();
-    console.log(card_list);
     dispatch(updateCard(card));
   };
 };
 
 export const checkedCardFB = card => {
-  console.log("card_id : ", card.id)
+  console.log("card_id : ", card.id);
   return async function (dispatch) {
-    const docRef = doc(db, "card", card.id)
-    console.log("1 : ", (await getDoc(docRef)).data())
-
-    await updateDoc(docRef, {completed: !card.completed})
-    console.log("2 : ",(await getDoc(docRef)).data())
-
-
-    dispatch(checkedCard(card))
-  }
-}
+    const docRef = doc(db, "card", card.id);
+    await updateDoc(docRef, { completed: !card.completed });
+    dispatch(checkedCard(card));
+  };
+};
 
 export const deleteCardFB = card_id => {
   return async function (dispatch, getState) {
@@ -141,25 +133,20 @@ export default function reducer(state = initState, action = {}) {
     }
 
     case "card/CHECKED": {
-      // console.log("state : ", state)
-      // console.log("action : ", action)
       const new_card_list = state.list.map((item, index) => {
-        // console.log("item : ",item.completed)
-        // console.log(action.card.id)
-        if(action.card.id === item.id) {
-            return  {...item, completed: !item.completed}
-          } else {  
-            return item;
-          }
+        if (action.card.id === item.id) {
+          return { ...item, completed: !item.completed };
+        } else {
+          return item;
+        }
       });
-      return { list : new_card_list}
+      return { list: new_card_list };
     }
 
     case "card/DELETE": {
       const new_card_list = state.list.filter((l, idx) => {
         return parseInt(action.card_index) !== idx;
       });
-
       return { list: new_card_list };
     }
     default:
