@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addCardFB, updateCardFB } from "./redux/modules/card";
-import { db } from "./firebase";
+import React from 'react';
+import styled from 'styled-components';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addCardFB, updateCardFB } from './redux/modules/card';
+import { db } from './firebase';
 import {
   collection,
   doc,
@@ -12,8 +12,8 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-} from "firebase/firestore";
-import store from "./redux/configStore";
+} from 'firebase/firestore';
+import store from './redux/configStore';
 
 function CardAdd() {
   const history = useHistory();
@@ -26,7 +26,8 @@ function CardAdd() {
   const item_id = url_value.id;
   const item_num = url_value.num;
   const item_data = store.getState().card.list[item_num];
-  console.log("item_data : ", item_data);
+
+  console.log('item_data : ', item_data);
 
   const addCreate = () => {
     dispatch(
@@ -35,33 +36,33 @@ function CardAdd() {
         txt2: txt2.current.value,
         txt3: txt3.current.value,
         completed: false,
-      })
+      }),
     );
   };
 
   const editUpdate = () => {
-    console.log("수정");
+    console.log('수정');
     dispatch(
       updateCardFB({
         txt1: txt1.current.value,
         txt2: txt2.current.value,
         txt3: txt3.current.value,
         id: item_data.id,
-      })
+      }),
     );
   };
 
   return (
     <AddContainer>
       <div className="addWrap">
-        <h2 className="addTitle">단어 {item_id ? "수정" : "추가"}</h2>
+        <h2 className="addTitle">단어 {item_id ? '수정' : '추가'}</h2>
         <form className="inputWrap">
           <div>
             <label>단어</label>
             <input
               name="txt1"
               ref={txt1}
-              defaultValue={item_id ? item_data.txt1 : ""}
+              defaultValue={item_id ? item_data.txt1 : ''}
               // onChange={(e)=> console.log(e.target.value)}
             ></input>
           </div>
@@ -70,7 +71,7 @@ function CardAdd() {
             <input
               name="txt2"
               ref={txt2}
-              defaultValue={item_id ? item_data.txt2 : ""}
+              defaultValue={item_id ? item_data.txt2 : ''}
             ></input>
           </div>
           <div>
@@ -78,7 +79,7 @@ function CardAdd() {
             <input
               name="txt3"
               ref={txt3}
-              defaultValue={item_id ? item_data.txt3 : ""}
+              defaultValue={item_id ? item_data.txt3 : ''}
             ></input>
           </div>
         </form>
@@ -86,10 +87,10 @@ function CardAdd() {
           className="saveBtn"
           onClick={() => {
             item_id ? editUpdate() : addCreate();
-            history.push("/");
+            history.push('/');
           }}
         >
-          {item_id ? "수정" : "저장"}하기
+          {item_id ? '수정' : '저장'}하기
         </div>
       </div>
     </AddContainer>

@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { BsCheckLg } from "react-icons/bs";
-import { BiEditAlt } from "react-icons/bi";
-import DeleteBtn from "./DeleteBtn";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { BsCheckLg } from 'react-icons/bs';
+import { BiEditAlt } from 'react-icons/bi';
+import DeleteBtn from './DeleteBtn';
 
-import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { db } from "./firebase";
-import { loadCardFB, checkedCardFB } from "./redux/modules/card";
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { db } from './firebase';
+import { loadCardFB, checkedCardFB } from './redux/modules/card';
 
 function CardList() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const cardList = useSelector(state => state.card.list);
+  const cardList = useSelector((state) => state.card.list);
 
   React.useEffect(() => {
     dispatch(loadCardFB());
@@ -46,7 +46,7 @@ function CardList() {
                 <span
                   className="edit"
                   onClick={() => {
-                    history.push("/edit/" + item.id + "/" + index);
+                    history.push('/edit/' + item.id + '/' + index);
                   }}
                 >
                   <BiEditAlt />
@@ -59,7 +59,7 @@ function CardList() {
         <div
           className="addBtn"
           onClick={() => {
-            history.push("/add");
+            history.push('/add');
           }}
         >
           <p>+</p>
@@ -156,8 +156,8 @@ const CardContainer = styled.div`
 `;
 
 const CardItem = styled.div`
-  background-color: ${props => (props.checked ? "#ccc" : "#fff")};
-  color: ${props => (props.checked ? "#fff" : "#000")};
+  background-color: ${(props) => (props.checked ? '#ccc' : '#fff')};
+  color: ${(props) => (props.checked ? '#fff' : '#000')};
   border-radius: 10px;
   padding: 16px;
   text-align: left;
@@ -169,7 +169,6 @@ const CardItem = styled.div`
 const CardTxt3 = styled.p`
   font-size: 16px;
   font-weight: 400;
-  color: ${props => (props.checked ? "#e29500" : "#0984e3")};
-  
+  color: ${(props) => (props.checked ? '#e29500' : '#0984e3')};
 `;
 export default CardList;
